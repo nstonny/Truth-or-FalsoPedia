@@ -1,4 +1,4 @@
-#include imports
+import services.ai_service  #include imports
 
 def print_welcome(rounds):
     """
@@ -16,7 +16,10 @@ def main():
     4. run all rounds, collect answers, call game.play()
     5. show final score and result message
     """
-    pass
+
+    ai_service = services.ai_service.AI_service()
+    statements = ai_service.generate_statements()
+
 
 if __name__ == "__main__":
     main()

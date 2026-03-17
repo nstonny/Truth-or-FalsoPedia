@@ -1,4 +1,14 @@
 #include imports
+import os
+from dotenv import load_dotenv
+from single_category import Category
+import json
+load_dotenv()
+api_key = os.getenv("OPENAI_API_KEY")
+from openai import OpenAI
+
+client = OpenAI(api_key=api_key)
+
 
 class AI_service:
 
@@ -7,16 +17,58 @@ class AI_service:
         1. define model, max_tokens, temperature
         2. initialize the model: openai client
         """
-        pass
 
-    def generate_statements(self, title: str, summary: str):
+
+    def generate_statements(self):
         #Asks OpenAI to produce one true and one false statement about an article.
-        pass
 
-    def build_prompt(self, title: str, summary: str):
+        # single category
+        category = Category("Flowering plant")
+        summaries = category.get_summary()
+        print(summaries)
+
+
+        # creating the prompt for openAI
+        prompt = self.build_prompt(summaries)
+
+        try:
+            # to openAI
+            response = client.responses.create(
+            model="gpt-5-nano",
+            input= prompt,
+            )
+
+            # parsing the response from openAI
+            parse_response = self.parse_response(response.output_text)
+            print(parse_response)
+
+        except Exception as e:
+            print("Something went wrong:", e)
+
+
+    def build_prompt(self, summaries: str):
         #Constructs the prompt sent to OpenAI.
-        pass
+        prompt = f"""You are helping create a quiz game based on Wikipedia articles.
+
+        Here is a list of Wikipedia article summaries:
+        Summaries: {summaries}
+
+        For each summary in the list, your task is to:
+        1. Write ONE statement that is TRUE and accurately reflects the summary.
+        2. Write ONE statement that is FALSE but sounds plausible — it should be tricky!
+
+        Respond ONLY with a valid JSON list in this exact format:
+
+        [
+          {{"true_statement": "Your true statement here", "false_statement": "Your false statement here."}},
+          {{"true_statement": "Your true statement here", "false_statement": "Your false statement here."}},
+          {{"true_statement": "Your true statement here", "false_statement": "Your false statement here."}}
+        ]
+        """
+
+        return prompt
 
     def parse_response(self, raw_text: str) :
         #Parses and validates the JSON string returned by OpenAI.
-        pass
+        statements = json.loads(raw_text)
+        return statements

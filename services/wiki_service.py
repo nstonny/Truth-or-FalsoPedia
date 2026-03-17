@@ -1,27 +1,65 @@
 #include imports
+import wikipedia
+import random
 
-class WikiService:
-    # Fetches article summaries from the Wikipedia REST API.
+from data_wikipedia import get_data_wikipedia
 
-    BASE_URL = "https://en.wikipedia.org/api/rest_v1/page/summary/"
 
-    def __init__(self):
-        # set timeout
-        pass
+class Category:
+    def __init__(self, category, url=None):
+        self.category = category
+        self.url = url
 
-    def get_summary(self, topic: str):
-        # Fetches the Wikipedia summary for a single article.
-        pass
+    def __str__(self):
+        return f"Category is {self.category}"
 
-    def get_random_summaries(self, count: int) :
-        # Returns summaries for a random selection from config.TOPICS.
-        pass
 
-    def build_url(self, topic: str):
-        pass
+    def choose_category(self):
+        """Returns User selected category"""
 
-    #def _parse_response(self, response: requests.Response, topic: str):
-        #pass
+        return self.category
+
+
+    def get_category_links(self):
+        """Returns a list of links from the category page
+        user selected"""
+
+        if self.url:
+            get_all_links = get_data_wikipedia(self.url)
+        else:
+            page = wikipedia.page(self.category)
+            get_all_links = page.links
+
+        links = get_all_links[1:20]
+        return links
+
+
+    def select_random_articles(self):
+        """Selects three random links from the links returned
+        from the wikipedia page"""
+
+        links = self.get_category_links()
+        random_links = []
+
+        for i in range(3):
+            random_link = random.choice(links)
+            random_links.append(random_link)
+        return random_links
+
+
+    def get_summary(self):
+        """Returns summary of the random links"""
+
+        random_links = self.select_random_articles()
+        summary_list = []
+        for link in random_links:
+            try:
+                summary = wikipedia.summary(link, sentences=1, auto_suggest=False)
+                if summary:
+                    summary_list.append(summary)
+            except Exception as e:
+                print(f"The error is {e}")
+        return summary_list
 
 
 
