@@ -40,9 +40,12 @@ class Category:
         links = self.get_category_links()
         random_links = []
 
-        for i in range(3):
-            random_link = random.choice(links)
-            random_links.append(random_link)
+        for i in range(8):
+            try:
+                random_link = random.choice(links)
+                random_links.append(random_link)
+            except Exception as e:
+                print(e)
         return random_links
 
 
@@ -53,7 +56,7 @@ class Category:
         summary_list = []
         for link in random_links:
             try:
-                summary = wikipedia.summary(link, sentences=1, auto_suggest=False)
+                summary = wikipedia.summary(link, sentences=1, auto_suggest=True)
                 if summary:
                     summary_list.append(summary)
             except Exception as e:
@@ -61,6 +64,16 @@ class Category:
         return summary_list
 
 
+
+
+category1 = Category("Flowering plant")
+print(category1.get_summary())
+
+category2 = Category("List of music artists and bands from England")
+print(category2.get_summary())
+
+category3 = Category("List of domesticated animals","https://en.wikipedia.org/wiki/List_of_domesticated_animals")
+print(category2.get_summary())
 
 
 
