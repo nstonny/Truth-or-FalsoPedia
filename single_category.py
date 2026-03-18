@@ -1,5 +1,6 @@
-import wikipedia
 import random
+
+import wikipedia
 
 from data_wikipedia import get_data_wikipedia
 
@@ -66,14 +67,14 @@ class Category:
 
 
 
-category1 = Category("Flowering plant")
+"""category1 = Category("Flowering plant")
 print(category1.get_summary())
 
 category2 = Category("List of music artists and bands from England")
 print(category2.get_summary())
 
 category3 = Category("List of domesticated animals","https://en.wikipedia.org/wiki/List_of_domesticated_animals")
-print(category2.get_summary())
+print(category2.get_summary())"""
 
 
 

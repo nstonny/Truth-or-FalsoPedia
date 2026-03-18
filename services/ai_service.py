@@ -1,10 +1,10 @@
 #include imports
 import os
 from dotenv import load_dotenv
-import category
+import single_category
 import json
 
-from category.single_category import Category
+
 
 load_dotenv()
 api_key = os.getenv("OPENAI_API_KEY")
@@ -26,9 +26,9 @@ class AI_service:
         #Asks OpenAI to produce one true and one false statement about an article.
 
         # single category
-        category = Category("Flowering plant")
+        category = single_category.Category("Flowering plant")
         summaries = category.get_summary()
-        print(summaries)
+
 
 
         # creating the prompt for openAI
@@ -43,7 +43,7 @@ class AI_service:
 
             # parsing the response from openAI
             parse_response = self.parse_response(response.output_text)
-            print(parse_response)
+            return parse_response
 
         except Exception as e:
             print("Something went wrong:", e)

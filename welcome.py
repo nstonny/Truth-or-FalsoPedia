@@ -28,7 +28,7 @@ def display_welcome_message():
 
     slow_print("Let the challenge begin!")
     print("=" * 60 + "\n")
-    input("Press ENTER to continue...\n")  # pause for dramatic effect
+    #input("Press ENTER to continue...\n")  # pause for dramatic effect
 
 
 def display_menu():
@@ -43,6 +43,4 @@ def display_menu():
     input("Select a category by entering the number: ")
 
 
-# Run the game flow
-display_welcome_message()
-display_menu()
+
