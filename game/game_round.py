@@ -1,5 +1,6 @@
 import random
 
+
 def get_quiz_statement():
     #you need to get question from storage location
     dummy_true_or_false = [
