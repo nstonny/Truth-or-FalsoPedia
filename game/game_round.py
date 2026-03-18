@@ -1,40 +1,42 @@
 import random
-#from  ..services.ai_service import AI_service
-#from .services import ai_service
 
-
-"""def get_quiz_statement():
-    #you need to get question from storage location
-    service = AI_service()
-    dummy_true_or_false =  service.generate_statements()
-
-    return dummy_true_or_false"""
-
+def user_info():
+    user_name = input("Please enter a username: ")
+    return user_name
 
 def play_round(statements):
+    player = user_info()
     quiz_statements = statements
     player_score = 0
+
     for i, item in enumerate(quiz_statements, start=1):
-        #get the statements
         correct_answer = item["true_statement"]
         wrong_answer = item["false_statement"]
 
-      # randomised and assigned statements
         option_dict = assign_randomised_statements(correct_answer, wrong_answer)
 
-        print(f"Round {i}, which one is False?")
-        for letter, statement in option_dict.items():
-            print(f" Choice {letter}: {statement}")
+        display_round(i, option_dict)  # prints the round
 
-        user_answer = get_player_answer()
-        if option_dict[user_answer] == wrong_answer:
-            print("correct, you have one point")
-            player_score += 1
-        else:
-            print("incorrect")
+        user_answer = get_player_answer(option_dict, player)  # validated input
 
-    end_game(player_score)
+        player_score += check_answer(user_answer, option_dict, wrong_answer, player)  # add point if correct
 
+    end_game(player_score, player)
+
+def display_round(round_number, option_dict):
+    """Display round number"""
+    print(f"Round {round_number}, which one is False?")
+    for letter, statement in option_dict.items():
+        print(f" Choice {letter}: {statement}")
+
+def check_answer(user_answer, option_dict, wrong_answer, player):
+    """Check if user answer correct"""
+    if option_dict[user_answer] == wrong_answer:
+        print(f"Username {player}: Correct! You get 1 point.")
+        return 1
+    else:
+        print(f"Username {player}: that was Incorrect answer!")
+        return 0
 
 def assign_randomised_statements(true_answer, false_answer):
     options = [true_answer, false_answer]
@@ -43,16 +45,22 @@ def assign_randomised_statements(true_answer, false_answer):
     option_dict = dict(zip(letter_choices, options)) #zip combines the answers with the letter choices
     return option_dict
 
-def get_player_answer():
-    answer = input("choose the false statement: ")
-    return answer
+def get_player_answer(option_dict, player):
+    """Get player answer"""
+    #player = user_info()
+    while True:
+        answer = input("please choose the false statement (a/b): ").strip().lower() #input validation
+        if answer in option_dict:
+            return answer
+        print(f"{player} That was an Invalid input! Please type one of:", ", ".join(option_dict.keys()))
 
-
-def end_game(score):
+def end_game(score, player):
+    """Finish game"""
+    print(f"Game over! Your score is {score}.")
     if score >= 3:
-        print("Great job. Go to the next round!")
+        print(f"{player} Great job. Go to the next round!")
     else:
-        print("AI fooled you. Better luck next time")
+        print(f"{player} AI fooled you. Better luck next time")
 #need to add the replay button
 
 

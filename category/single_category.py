@@ -62,20 +62,7 @@ class Category:
                     summary_list.append(summary)
             except Exception as e:
                 print(f"The error is {e}")
-        print(summary_list)
         return summary_list
-
-
-
-
-"""category1 = Category("Flowering plant")
-print(category1.get_summary())
-
-category2 = Category("List of music artists and bands from England")
-print(category2.get_summary())
-
-category3 = Category("List of domesticated animals","https://en.wikipedia.org/wiki/List_of_domesticated_animals")
-print(category3.get_summary())"""
 
 
 

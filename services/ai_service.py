@@ -29,14 +29,13 @@ class AI_service:
         category = Category(self.user_category)
         print(self.user_category)
         summaries = category.get_summary()
-        print(summaries)
-
-
 
         # creating the prompt for openAI
         prompt = self.build_prompt(summaries)
 
-        """try:
+        """
+
+        try:
             # to openAI
             response = client.responses.create(
             model="gpt-5-nano",
@@ -44,31 +43,10 @@ class AI_service:
             )
 
             # parsing the response from openAI
-            parse_response = self.parse_response(response.output_text)"""
-        return   [
-        {
-            "true_statement": "APG III system of flowering plant classification is the third version of a modern, mostly molecular-based system of plant taxonomy being developed by the Angiosperm Phylogeny Group (APG).",
-            "false_statement": "Acorus is a genus of dicot flowering plants."
-        },
-
-        {
-            "true_statement": "APG III system of flowering plant classification is the third version of a modern, mostly molecular-based system of plant taxonomy being developed by the Angiosperm Phylogeny Group (APG).",
-            "false_statement": "Acorus is a genus of dicot flowering plants."
-        },
-
-        {
-            "true_statement": "APG III system of flowering plant classification is the third version of a modern, mostly molecular-based system of plant taxonomy being developed by the Angiosperm Phylogeny Group (APG).",
-            "false_statement": "Acorus is a genus of dicot flowering plants."
-        },
-        {
-            "true_statement": "APG III system of flowering plant classification is the third version of a modern, mostly molecular-based system of plant taxonomy being developed by the Angiosperm Phylogeny Group (APG).",
-            "false_statement": "Acorus is a genus of dicot flowering plants."
-        }
-
-    ] #quiz dict
-
-        #except Exception as e:
-            #print("Something went wrong:", e)
+            parse_response = self.parse_response(response.output_text)
+            return parse_response
+        except Exception as e:
+            print("Something went wrong:", e)"""
 
 
     def build_prompt(self, summaries: str):

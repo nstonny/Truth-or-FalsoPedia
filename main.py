@@ -20,15 +20,11 @@ def main():
     4. run all rounds, collect answers, call game.play()
     5. show final score and result message
     """
-    #display_welcome_message()
-
+    display_welcome_message()
     user_display = display_menu()
     ai_service = services.ai_service.AI_service(user_display)
     statements = ai_service.generate_statements()
-    #print(statements)
     play_round(statements)
-
-
 
 if __name__ == "__main__":
     main()
