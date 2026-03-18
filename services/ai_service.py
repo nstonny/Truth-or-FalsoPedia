@@ -1,8 +1,11 @@
 #include imports
 import os
 from dotenv import load_dotenv
-from single_category import Category
+import category
 import json
+
+from category.single_category import Category
+
 load_dotenv()
 api_key = os.getenv("OPENAI_API_KEY")
 from openai import OpenAI
