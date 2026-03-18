@@ -33,8 +33,6 @@ class AI_service:
         # creating the prompt for openAI
         prompt = self.build_prompt(summaries)
 
-        """
-
         try:
             # to openAI
             response = client.responses.create(
@@ -46,7 +44,8 @@ class AI_service:
             parse_response = self.parse_response(response.output_text)
             return parse_response
         except Exception as e:
-            print("Something went wrong:", e)"""
+            print("Something went wrong:", e)
+
 
 
     def build_prompt(self, summaries: str):

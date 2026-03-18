@@ -58,9 +58,12 @@ def end_game(score, player):
     """Finish game"""
     print(f"Game over! Your score is {score}.")
     if score >= 3:
-        print(f"{player} Great job. Go to the next round!")
+        print(f"{player} Great job.")
     else:
         print(f"{player} AI fooled you. Better luck next time")
+
+
+
 #need to add the replay button
 
 
