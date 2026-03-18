@@ -37,7 +37,7 @@ def display_menu():
     slow_print("*** CATEGORIES ***", 0.06)
     slow_print("1. Music")
     slow_print("2. Flowering plants")
-    slow_print("3. Animals")
+    slow_print("3. Machine learning algorithms")
     print("=" * 60 + "\n")
 
     while True:
@@ -52,7 +52,7 @@ def display_menu():
     elif user_category == 2:
         return "Flowering plants"
     elif user_category == 3:
-        return "List of domesticated animals"
+        return "Machine learning algorithms"
     else:
         return "User selected category doesn't exist"
 

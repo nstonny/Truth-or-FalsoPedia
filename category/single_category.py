@@ -62,7 +62,7 @@ class Category:
                     summary_list.append(summary)
             except Exception as e:
                 print(f"The error is {e}")
-        print(len(summary_list))
+        print(summary_list)
         return summary_list
 
 
