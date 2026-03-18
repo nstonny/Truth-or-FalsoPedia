@@ -1,10 +1,8 @@
 #include imports
 import os
 from dotenv import load_dotenv
-import single_category
+from category.single_category import Category
 import json
-
-
 
 load_dotenv()
 api_key = os.getenv("OPENAI_API_KEY")
@@ -15,26 +13,30 @@ client = OpenAI(api_key=api_key)
 
 class AI_service:
 
-    def __init__(self):
+    def __init__(self, user_category):
         """
         1. define model, max_tokens, temperature
         2. initialize the model: openai client
         """
+        self.user_category = user_category
 
 
     def generate_statements(self):
         #Asks OpenAI to produce one true and one false statement about an article.
 
         # single category
-        category = single_category.Category("Flowering plant")
+
+        category = Category(self.user_category)
+        print(self.user_category)
         summaries = category.get_summary()
+        print(summaries)
 
 
 
         # creating the prompt for openAI
         prompt = self.build_prompt(summaries)
 
-        try:
+        """try:
             # to openAI
             response = client.responses.create(
             model="gpt-5-nano",
@@ -42,11 +44,31 @@ class AI_service:
             )
 
             # parsing the response from openAI
-            parse_response = self.parse_response(response.output_text)
-            return parse_response
+            parse_response = self.parse_response(response.output_text)"""
+        return   [
+        {
+            "true_statement": "APG III system of flowering plant classification is the third version of a modern, mostly molecular-based system of plant taxonomy being developed by the Angiosperm Phylogeny Group (APG).",
+            "false_statement": "Acorus is a genus of dicot flowering plants."
+        },
 
-        except Exception as e:
-            print("Something went wrong:", e)
+        {
+            "true_statement": "APG III system of flowering plant classification is the third version of a modern, mostly molecular-based system of plant taxonomy being developed by the Angiosperm Phylogeny Group (APG).",
+            "false_statement": "Acorus is a genus of dicot flowering plants."
+        },
+
+        {
+            "true_statement": "APG III system of flowering plant classification is the third version of a modern, mostly molecular-based system of plant taxonomy being developed by the Angiosperm Phylogeny Group (APG).",
+            "false_statement": "Acorus is a genus of dicot flowering plants."
+        },
+        {
+            "true_statement": "APG III system of flowering plant classification is the third version of a modern, mostly molecular-based system of plant taxonomy being developed by the Angiosperm Phylogeny Group (APG).",
+            "false_statement": "Acorus is a genus of dicot flowering plants."
+        }
+
+    ] #quiz dict
+
+        #except Exception as e:
+            #print("Something went wrong:", e)
 
 
     def build_prompt(self, summaries: str):

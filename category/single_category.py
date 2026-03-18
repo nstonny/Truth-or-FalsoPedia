@@ -2,7 +2,7 @@ import random
 
 import wikipedia
 
-from data_wikipedia import get_data_wikipedia
+from .data_wikipedia import get_data_wikipedia
 
 
 class Category:
@@ -41,7 +41,7 @@ class Category:
         links = self.get_category_links()
         random_links = []
 
-        for i in range(8):
+        for i in range(3):
             try:
                 random_link = random.choice(links)
                 random_links.append(random_link)
@@ -57,11 +57,12 @@ class Category:
         summary_list = []
         for link in random_links:
             try:
-                summary = wikipedia.summary(link, sentences=1, auto_suggest=True)
+                summary = wikipedia.summary(link, sentences=1, auto_suggest=False)
                 if summary:
                     summary_list.append(summary)
             except Exception as e:
                 print(f"The error is {e}")
+        print(len(summary_list))
         return summary_list
 
 
@@ -74,7 +75,7 @@ category2 = Category("List of music artists and bands from England")
 print(category2.get_summary())
 
 category3 = Category("List of domesticated animals","https://en.wikipedia.org/wiki/List_of_domesticated_animals")
-print(category2.get_summary())"""
+print(category3.get_summary())"""
 
 
 

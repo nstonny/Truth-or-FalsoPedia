@@ -1,35 +1,18 @@
 import random
+#from  ..services.ai_service import AI_service
+#from .services import ai_service
 
 
-def get_quiz_statement():
+"""def get_quiz_statement():
     #you need to get question from storage location
-    dummy_true_or_false = [
-        {
-            "true_statement": "APG III system of flowering plant classification is the third version of a modern, mostly molecular-based system of plant taxonomy being developed by the Angiosperm Phylogeny Group (APG).",
-            "false_statement": "Acorus is a genus of dicot flowering plants."
-        },
+    service = AI_service()
+    dummy_true_or_false =  service.generate_statements()
 
-        {
-            "true_statement": "APG III system of flowering plant classification is the third version of a modern, mostly molecular-based system of plant taxonomy being developed by the Angiosperm Phylogeny Group (APG).",
-            "false_statement": "Acorus is a genus of dicot flowering plants."
-        },
-
-        {
-            "true_statement": "APG III system of flowering plant classification is the third version of a modern, mostly molecular-based system of plant taxonomy being developed by the Angiosperm Phylogeny Group (APG).",
-            "false_statement": "Acorus is a genus of dicot flowering plants."
-        },
-        {
-            "true_statement": "APG III system of flowering plant classification is the third version of a modern, mostly molecular-based system of plant taxonomy being developed by the Angiosperm Phylogeny Group (APG).",
-            "false_statement": "Acorus is a genus of dicot flowering plants."
-        }
-
-    ] #quiz dict
-
-    return dummy_true_or_false
+    return dummy_true_or_false"""
 
 
-def play_round():
-    quiz_statements = get_quiz_statement()
+def play_round(statements):
+    quiz_statements = statements
     player_score = 0
     for i, item in enumerate(quiz_statements, start=1):
         #get the statements
@@ -73,4 +56,4 @@ def end_game(score):
 #need to add the replay button
 
 
-print(play_round())
+

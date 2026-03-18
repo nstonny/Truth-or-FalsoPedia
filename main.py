@@ -1,5 +1,6 @@
 import services.ai_service
 from welcome import display_welcome_message, display_menu
+from game.game_round import play_round
 
 
 
@@ -19,11 +20,14 @@ def main():
     4. run all rounds, collect answers, call game.play()
     5. show final score and result message
     """
-    display_welcome_message()
-    display_menu()
+    #display_welcome_message()
 
-    #ai_service = services.ai_service.AI_service()
-    #statements = ai_service.generate_statements()
+    user_display = display_menu()
+    ai_service = services.ai_service.AI_service(user_display)
+    statements = ai_service.generate_statements()
+    #print(statements)
+    play_round(statements)
+
 
 
 if __name__ == "__main__":

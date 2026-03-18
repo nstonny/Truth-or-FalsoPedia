@@ -36,11 +36,27 @@ def display_menu():
     print("=" * 60)
     slow_print("*** CATEGORIES ***", 0.06)
     slow_print("1. Music")
-    slow_print("2. Science")
-    slow_print("3. History")
-    slow_print("4. Geography")
+    slow_print("2. Flowering plants")
+    slow_print("3. Animals")
     print("=" * 60 + "\n")
-    input("Select a category by entering the number: ")
+
+    while True:
+        try:
+            user_category = int(input("Select a category by entering the number: "))
+            break
+        except ValueError:
+            print("Please enter a number")
+
+    if user_category == 1:
+        return "List of music artists and bands from England"
+    elif user_category == 2:
+        return "Flowering plants"
+    elif user_category == 3:
+        return "List of domesticated animals"
+    else:
+        return "User selected category doesn't exist"
+
+
 
 
 
